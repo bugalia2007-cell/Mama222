@@ -52,7 +52,7 @@ BCOV_POLICY = "BCpkADawqM1474MvKwYlMRZNBPoqkJY-UWm7zE1U769d5r5kqTjG0v8L-THXuVZtd
 bc_url = (f"https://edge.api.brightcove.com/playback/v1/accounts/{ACCOUNT_ID}/videos")
 bc_hdr = {"BCOV-POLICY": BCOV_POLICY}
 
-@bot.on_message(filters.command(["cw"])& ~filters.edited)
+@bot.on_message(filters.command(["cw"]))
 async def cw_handler(bot: Client, m: Message):
     global cancel
     cancel = False
