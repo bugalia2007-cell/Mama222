@@ -46,7 +46,7 @@ import cloudscraper
 from Crypto.Cipher import AES
 from Crypto.Util.Padding import unpad
 from base64 import b64encode, b64decode
-@bot.on_message(filters.command(["exampur"]) & ~filters.edited)
+@bot.on_message(filters.command(["exampur"]))
 async def exampur_handler(bot: Client, m: Message):
     global cancel
     cancel = False

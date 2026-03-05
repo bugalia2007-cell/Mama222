@@ -32,7 +32,7 @@ def decode(tn):
   plaintext = unpad(cipher.decrypt(ciphertext), AES.block_size)
   url=plaintext.decode('utf-8')
   return url
-@bot.on_message(filters.command(["mgconcept"]) & ~filters.edited)
+@bot.on_message(filters.command(["mgconcept"]))
 async def mgconcept_handler(bot: Client, m: Message):
     global cancel
     cancel = False

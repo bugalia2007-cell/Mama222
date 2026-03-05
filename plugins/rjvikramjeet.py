@@ -55,7 +55,7 @@ def decode(tn):
   plaintext = unpad(cipher.decrypt(ciphertext), AES.block_size)
   url=plaintext.decode('utf-8')
   return url
-@bot.on_message(filters.command(["rgvikramjeet"]) & ~filters.edited)
+@bot.on_message(filters.command(["rgvikramjeet"]))
 async def rjvikramjeet_handler(bot: Client, m: Message):
     s = requests.Session()
     global cancel

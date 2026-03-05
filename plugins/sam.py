@@ -47,7 +47,7 @@ from Crypto.Cipher import AES
 from Crypto.Util.Padding import unpad
 from base64 import b64encode, b64decode
 
-@bot.on_message(filters.command(["samyak"]) & ~filters.edited)
+@bot.on_message(filters.command(["samyak"]))
 async def sam_handler(bot: Client, m: Message):
     global cancel
     s = requests.Session()
