@@ -42,14 +42,15 @@ async def start_web():
 
 if __name__ == "__main__":
     bot = Client(
-        "StarkBot_new",
-        bot_token=Config.BOT_TOKEN,
-        api_id=Config.API_ID,
-        api_hash=Config.API_HASH,
-        sleep_threshold=20,
-        plugins=plugins,
-        workers=50
-    )
+    "StarkBot_new",
+    bot_token=Config.BOT_TOKEN,
+    api_id=Config.API_ID,
+    api_hash=Config.API_HASH,
+    sleep_threshold=20,
+    plugins=plugins,
+    workers=50,
+    in_memory=True
+)
 
     async def main():
         await start_web()
