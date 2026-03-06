@@ -21,10 +21,9 @@ logging.basicConfig(
 
 AUTH_USERS = [int(chat) for chat in Config.AUTH_USERS.split(",") if chat.strip() != '']
 prefixes = ["/", "~", "?", "!"]
-plugins = dict(root="plugins", include=["plugins.__init__"])
+plugins = dict(root="plugins")
 
 def run_web():
-    from aiohttp import web
     import asyncio
     loop = asyncio.new_event_loop()
     asyncio.set_event_loop(loop)
@@ -47,14 +46,14 @@ if __name__ == "__main__":
         sleep_threshold=20,
         plugins=plugins,
         workers=50,
-        in_memory=True
+        in_memory=True,
+        takeout=False
     )
 
     async def main():
         await bot.start()
         bot_info = await bot.get_me()
         LOGGER.info(f"<--- @{bot_info.username} Started (c) STARKBOT --->")
-        await bot.send_message(5858320107, "Bot is working!")
         await idle()
 
     asyncio.run(main())
