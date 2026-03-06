@@ -24,7 +24,7 @@ AUTH_USERS = [int(chat) for chat in Config.AUTH_USERS.split(",") if chat.strip()
 # Prefixes
 prefixes = ["/", "~", "?", "!"]
 
-plugins = dict(root="plugins")
+plugins = dict(root="plugins", include=["plugins.__init__"])
 
 # Simple web server — Render ka "No open ports" error fix
 async def health(request):
