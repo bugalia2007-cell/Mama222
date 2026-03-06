@@ -1,4 +1,6 @@
-from pyrogram import filters
+@stark.on_message()
+async def debug_all(bot, m):
+    print(f"✅ Message: {m.text} from {m.from_user.id}")from pyrogram import filters
 from pyrogram import Client as stark
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message
 from main import LOGGER, prefixes, AUTH_USERS
