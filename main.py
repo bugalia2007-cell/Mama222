@@ -4,7 +4,6 @@ from pyrogram import Client, idle
 import asyncio
 import logging
 import tgcrypto
-from pyromod import listen
 from logging.handlers import RotatingFileHandler
 from aiohttp import web
 
@@ -43,7 +42,7 @@ async def start_web():
 
 if __name__ == "__main__":
     bot = Client(
-        "StarkBot",
+        "StarkBot_new",
         bot_token=Config.BOT_TOKEN,
         api_id=Config.API_ID,
         api_hash=Config.API_HASH,
