@@ -6,6 +6,7 @@ import logging
 import tgcrypto
 from logging.handlers import RotatingFileHandler
 from aiohttp import web
+import threading
 
 LOGGER = logging.getLogger(__name__)
 logging.basicConfig(
@@ -18,46 +19,42 @@ logging.basicConfig(
     ],
 )
 
-# Auth Users
 AUTH_USERS = [int(chat) for chat in Config.AUTH_USERS.split(",") if chat.strip() != '']
-
-# Prefixes
 prefixes = ["/", "~", "?", "!"]
-
 plugins = dict(root="plugins", include=["plugins.__init__"])
 
-# Simple web server — Render ka "No open ports" error fix
-async def health(request):
-    return web.Response(text="Bot is running!")
-
-async def start_web():
+def run_web():
+    from aiohttp import web
+    import asyncio
+    loop = asyncio.new_event_loop()
+    asyncio.set_event_loop(loop)
     app = web.Application()
+    async def health(request):
+        return web.Response(text="Bot is running!")
     app.router.add_get("/", health)
-    runner = web.AppRunner(app)
-    await runner.setup()
-    port = int(os.environ.get("PORT", 8080))
-    site = web.TCPSite(runner, "0.0.0.0", port)
-    await site.start()
-    LOGGER.info(f"Web server started on port {port}")
+    port = int(os.environ.get("PORT", 10000))
+    web.run_app(app, host="0.0.0.0", port=port, loop=loop)
 
 if __name__ == "__main__":
+    t = threading.Thread(target=run_web, daemon=True)
+    t.start()
+
     bot = Client(
-    "StarkBot_new",
-    bot_token=Config.BOT_TOKEN,
-    api_id=Config.API_ID,
-    api_hash=Config.API_HASH,
-    sleep_threshold=20,
-    plugins=plugins,
-    workers=50,
-    in_memory=True
-)
+        "StarkBot_new",
+        bot_token=Config.BOT_TOKEN,
+        api_id=Config.API_ID,
+        api_hash=Config.API_HASH,
+        sleep_threshold=20,
+        plugins=plugins,
+        workers=50,
+        in_memory=True
+    )
 
     async def main():
-        await start_web()
         await bot.start()
         bot_info = await bot.get_me()
         LOGGER.info(f"<--- @{bot_info.username} Started (c) STARKBOT --->")
+        await bot.send_message(5858320107, "Bot is working!")
         await idle()
 
     asyncio.run(main())
-    LOGGER.info(f"<---Bot Stopped-->")
