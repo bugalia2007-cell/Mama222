@@ -1,7 +1,6 @@
 from pyrogram import filters
-from pyrogram import filters
 from pyrogram import Client as stark
-from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message
+from pyrogram.types import Message
 from main import LOGGER, prefixes, AUTH_USERS
 from config import Config
 import os
@@ -15,11 +14,7 @@ async def debug_all(bot, m):
 
 @stark.on_message(filters.command(["start"]))
 async def Start_msg(bot: stark, m: Message):
-    await m.reply_text(
-        "**Hi i am All in One Extractor Bot** 🤖\n\n"
-        "Press **/pw** for **Physics Wallah**\n\n"
-        "**𝗕𝗼𝘁 𝗢𝘄𝗻𝗲𝗿 : YASH**"
-    )
+    await m.reply_text("**Hi i am All in One Extractor Bot** 🤖\n\n**Bot Owner: YASH**")
 
 
 @stark.on_message(filters.command(["ping"]))
